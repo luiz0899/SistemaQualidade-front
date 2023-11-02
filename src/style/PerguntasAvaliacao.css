@@ -1,0 +1,37 @@
+
+.input-text{
+    align-items: center;
+    text-align: center;
+}
+
+.form-floating{
+    margin: 20px;
+}
+
+.script-Ouvidoria{
+    margin-top:50px;
+    font-size: 10px;
+    color: blue;
+
+}
+.estrelas{
+    margin: 10px;
+
+}
+.estrelas input[type=radio] {
+    display: none;
+}
+.estrelas label i.fa:before {
+    content:'\f005';
+    color: #FC0;
+}
+.estrelas input[type=radio]:checked ~ label i.fa:before {
+    color: #CCC;
+}
+
+h1{
+    margin: 10px;
+    font-family: 'Playball';
+    font-size: 5rem;
+    color: aliceblue;
+}

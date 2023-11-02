@@ -1,0 +1,16 @@
+.input-text{
+    align-items: center;
+    text-align: center;
+}
+
+.form-floating{
+    margin: 20px;
+}
+.mb-3{
+    color: aliceblue;
+    margin: 20px;
+}
+h2{
+    margin-top: 2rem;
+    margin-bottom: -10px;
+}

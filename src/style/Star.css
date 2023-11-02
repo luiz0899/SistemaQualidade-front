@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+  }
+  
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
