@@ -1,6 +1,6 @@
 import '../style/PerguntasAvaliacao.css';
 import { useState } from 'react';
-
+import { useLocation  } from 'react-router-dom';
 import Star from './Star';
 import axios from 'axios';
 
@@ -8,65 +8,65 @@ const items = [...(new Array(5).keys())];
 const items1 = [...(new Array(5).keys())];
 const items2 = [...(new Array(5).keys())];
 
-
-
 const PerguntasAvaliacao = () => {
+  
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const idCliente = params.get('idCliente');
+  
+  const dataHoraAtual = new Date();
 
   const [avalEntregador, setAvalEntregador] = useState('');
-  const [avalEntregadorStay, setAvalEntregadorStay] = useState('');
+  const [avalEntregadorStay] = useState('');
   const [avalPedido, setAvalPedido] = useState('');
-  const [avalPedidoStay, setAvalPedidoStay] = useState('');
+  const [avalPedidoStay] = useState('');
   const [avalRestaurante, setAvalRestaurante] = useState('');
-  const [avalRestauranteStay, setAvalRestauranteStay] = useState('');
+  const [avalRestauranteStay] = useState('');
 
   const [activeIndex, setActiveIndex] = useState();
-  const [activeIndex1, setActiveIndex1] = useState();
-  const [activeIndex2, setActiveIndex2] = useState();
+  const [activeIndex1] = useState();
+  const [activeIndex2] = useState();
 
-  const onClickStar = (index) => {
-    setActiveIndex((oldState) => (oldState === index ? undefined : index));
-    setAvalEntregadorStay(index)
-    console.log(index);
+  const onClickStar = (index, setAvalStay) => {
+    setActiveIndex(index);
+    setAvalStay(index);
   };
-  const onClickStar1 = (index) => {
-    setActiveIndex1((oldState) => (oldState === index ? undefined : index));
-    setAvalPedidoStay(index)
-  };
-  const onClickStar2 = (index) => {
-    setActiveIndex2((oldState) => (oldState === index ? undefined : index));
-    setAvalRestauranteStay(index)
+
+  const dataAvaliacao = {
+    idCliente,
+    dataHoraAtual,
+    entregador: {
+      comentario: avalEntregador,
+      avaliacao: avalEntregadorStay,
+    },
+    pedido: {
+      comentario: avalPedido,
+      avaliacao: avalPedidoStay,
+    },
+    restaurante: {
+      comentario: avalRestaurante,
+      avaliacao: avalRestauranteStay,
+    },
   };
 
   const PostarAvaliacao = () => {
-
-    const data = {
-      avalEntregador,
-      avalEntregadorStay,
-      avalPedido,
-      avalPedidoStay,
-      avalRestaurante,
-      avalRestauranteStay,
-    };
-
-    axios.post("avaliacao", data)
+    axios.post("avaliacao", dataAvaliacao)
       .then((response) => {
         console.log("POST request success:", response.data);
       })
       .catch((error) => {
         console.error("POST request error:", error);
       });
-
-      console.log(data)
   };
-
 
   return (
 
+    
     <div className='input-text'>
 
 
       <h1> Pede aí </h1>
-
+      <h2>numero no pedido: {idCliente}</h2>
       <h2>Como gostaria de avaliar nosso entregador ?</h2>
 
       <div className="form-floating">
@@ -95,7 +95,7 @@ const PerguntasAvaliacao = () => {
         <div className="container">
           {items1.map((index) => (
             <Star
-              onClick={() => onClickStar1(index)}
+              onClick={() => onClickStar(index)}
               key={`star_${index}`}
               isActive={index <= activeIndex1}
             />
@@ -113,7 +113,7 @@ const PerguntasAvaliacao = () => {
         <div className="container">
           {items2.map((index) => (
             <Star
-              onClick={() => onClickStar2(index)}
+              onClick={() => onClickStar(index)}
               key={`star_${index}`}
               isActive={index <= activeIndex2}
             />
