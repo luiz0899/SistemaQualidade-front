@@ -2,55 +2,63 @@ import '../style/PerguntasAvaliacao.css';
 import { useState } from 'react';
 import { useLocation  } from 'react-router-dom';
 import Star from './Star';
-import axios from 'axios';
+import blogFetch from '../axios/config';
 
-const items = [...(new Array(5).keys())];
-const items1 = [...(new Array(5).keys())];
-const items2 = [...(new Array(5).keys())];
+const items = [...(new Array(5).keys())].map(index => index + 1);
+const items1 = [...(new Array(5).keys())].map(index => index + 1);
+const items2 = [...(new Array(5).keys())].map(index => index + 1);
+
 
 const PerguntasAvaliacao = () => {
   
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const idCliente = params.get('idCliente');
+  const idDoPedido = params.get('idCliente');
   
-  const dataHoraAtual = new Date();
-
   const [avalEntregador, setAvalEntregador] = useState('');
-  const [avalEntregadorStay] = useState('');
   const [avalPedido, setAvalPedido] = useState('');
-  const [avalPedidoStay] = useState('');
   const [avalRestaurante, setAvalRestaurante] = useState('');
-  const [avalRestauranteStay] = useState('');
+  const [avalEntregadorStay, setAvalEntregadorStay] = useState('');
+  const [avalPedidoStay, setAvalPedidoStay] = useState('');
+  const [avalRestauranteStay, setAvalRestauranteStay] = useState('');
 
   const [activeIndex, setActiveIndex] = useState();
-  const [activeIndex1] = useState();
-  const [activeIndex2] = useState();
+  const [activeIndex1, setActiveIndex1] = useState();
+  const [activeIndex2 ,setActiveIndex2] = useState();
 
-  const onClickStar = (index, setAvalStay) => {
+  const onClickStar1 = (index) => {
     setActiveIndex(index);
-    setAvalStay(index);
+    setAvalEntregadorStay(index);
+  };
+  
+  const onClickStar2 = (index) => {
+    setActiveIndex1(index);
+    setAvalPedidoStay(index);
+  };
+  
+  const onClickStar3 = (index) => {
+    setActiveIndex2(index);
+    setAvalRestauranteStay(index);
   };
 
   const dataAvaliacao = {
-    idCliente,
-    dataHoraAtual,
-    entregador: {
+    idDoPedido,
+    avaliacaoDoEntregador: {
       comentario: avalEntregador,
-      avaliacao: avalEntregadorStay,
+      estrelas: avalEntregadorStay,
     },
-    pedido: {
+    avaliacaoDoPedido: {
       comentario: avalPedido,
-      avaliacao: avalPedidoStay,
+      estrelas: avalPedidoStay,
     },
-    restaurante: {
+    avaliacaoDoRestaurante: {
       comentario: avalRestaurante,
-      avaliacao: avalRestauranteStay,
+      estrelas: avalRestauranteStay,
     },
   };
 
   const PostarAvaliacao = () => {
-    axios.post("avaliacao", dataAvaliacao)
+    blogFetch.post("avaliacao", dataAvaliacao)
       .then((response) => {
         console.log("POST request success:", response.data);
       })
@@ -66,7 +74,7 @@ const PerguntasAvaliacao = () => {
 
 
       <h1> Pede aí </h1>
-      <h2>numero no pedido: {idCliente}</h2>
+      <h2>numero no pedido: {idDoPedido}</h2>
       <h2>Como gostaria de avaliar nosso entregador ?</h2>
 
       <div className="form-floating">
@@ -77,7 +85,7 @@ const PerguntasAvaliacao = () => {
         <div className="container">
           {items.map((index) => (
             <Star
-              onClick={() => onClickStar(index)}
+              onClick={() => onClickStar1(index)}
               key={`star_${index}`}
               isActive={index <= activeIndex}
             />
@@ -95,7 +103,7 @@ const PerguntasAvaliacao = () => {
         <div className="container">
           {items1.map((index) => (
             <Star
-              onClick={() => onClickStar(index)}
+              onClick={() => onClickStar2(index)}
               key={`star_${index}`}
               isActive={index <= activeIndex1}
             />
@@ -113,7 +121,7 @@ const PerguntasAvaliacao = () => {
         <div className="container">
           {items2.map((index) => (
             <Star
-              onClick={() => onClickStar(index)}
+              onClick={() => onClickStar3(index)}
               key={`star_${index}`}
               isActive={index <= activeIndex2}
             />
