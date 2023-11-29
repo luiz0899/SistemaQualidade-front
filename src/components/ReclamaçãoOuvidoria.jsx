@@ -1,21 +1,22 @@
 import axios from "axios";
 import "../style/ReclamacaoOuvidoria.css"
 import { useState } from "react";
+import blogFetch from "../axios/config";
 const ReclamaçãoOuvidoria = () => {
 
     const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
-    const [reclamacao, setReclamacao] = useState('');
+    const [descricao, setDescricao] = useState('');
 
     const PostarAvaliacao = () => {
 
         const data = {
             email,
             nome,
-            reclamacao
+            descricao
         };
 
-        axios.post("ouvidoria", data)
+        blogFetch.post("ouvidoria", data)
             .then((response) => {
                 console.log("POST request success:", response.data);
             })
@@ -48,7 +49,7 @@ const ReclamaçãoOuvidoria = () => {
 
                 <div className="mb-3">
                     <label form="exampleFormControlTextarea1" className="form-label"></label>
-                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" onChange={(e) => setReclamacao(e.target.value)}></textarea>
+                    <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" onChange={(e) => setDescricao(e.target.value)}></textarea>
                 </div>
 
 
