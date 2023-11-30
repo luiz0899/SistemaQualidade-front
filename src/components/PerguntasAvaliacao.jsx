@@ -14,6 +14,7 @@ const PerguntasAvaliacao = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const idDoPedido = params.get('idCliente');
+  const idDoRestaurante = params.get('idRestaurante');
   
   const [avalEntregador, setAvalEntregador] = useState('');
   const [avalPedido, setAvalPedido] = useState('');
@@ -43,6 +44,7 @@ const PerguntasAvaliacao = () => {
 
   const dataAvaliacao = {
     idDoPedido,
+    idDoRestaurante,
     avaliacaoDoEntregador: {
       comentario: avalEntregador,
       estrelas: avalEntregadorStay,

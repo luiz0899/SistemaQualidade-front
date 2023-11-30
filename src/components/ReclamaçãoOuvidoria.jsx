@@ -1,4 +1,3 @@
-import axios from "axios";
 import "../style/ReclamacaoOuvidoria.css"
 import { useState } from "react";
 import blogFetch from "../axios/config";
