@@ -3,10 +3,8 @@ import '../style/Login.css';
 
 const Login = () => {
   return (
-    <body className="fundo">
-        <main className="main"> 
+    <body className="fundoLogin">
             <LoginAuth />
-        </main>
     </body>
     
   );

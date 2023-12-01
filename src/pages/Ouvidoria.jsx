@@ -1,5 +1,7 @@
 import ReclamaçãoOuvidoria from "../components/ReclamaçãoOuvidoria"
+
 const Ouvidoria = () => {
+
   return (
 
     <body className="fundo">
@@ -12,4 +14,4 @@ const Ouvidoria = () => {
   )
 }
 
-export default Ouvidoria
+export default Ouvidoria;

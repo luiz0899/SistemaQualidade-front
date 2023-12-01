@@ -1,16 +1,12 @@
 
-.fundo {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: url("../img/fundo.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
-    background-position: center center; 
-    overflow-y: auto;
 
-  }
+
+ .corpoLogin {
+
+    text-align: center;
+    background-color: rgba(10, 10, 10, 0.651);
+    border-radius: 10px;
+    width:  250px;
+    padding: 10px;
+
+}
