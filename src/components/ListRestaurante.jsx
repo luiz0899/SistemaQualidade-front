@@ -1,32 +1,77 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import '../style/ListRestaurante.css';
 import blogFetch from '../axios/config';
+import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
 
+const ListRestaurante = () => {
+  const [restaurantes, setRestaurantes] = useState([]);
+ 
+  const [restaurante, setRestaurante] = useState('');
 
-const listRestaurante = () => {
+  const buscarRest = () => {
+   
 
-  const [restaurante,setRestaurante ] = useState('');
-  const [posts, setTodos] = useState([]);
-
-  const buscarRest = ( ) =>{
-    
-      const data = {
-        restaurante,
-      };
-  
-      blogFetch.get("auth", data)
-          .then((response) => {
-
-              console.log("POST request success:", response.data);
-              setTodos(data);
-          })
-          .catch((error) => {
-              console.error("POST request error:", error);
-          });
-     
+   blogFetch
+      .get(`/avaliacao/restaurante/${restaurante}`)
+      .then((response) => {
+        console.log('Get request success:', response.data);
+        setRestaurantes(response.data.listagem);
+      })
+      .catch((error) => {
+        console.error('Get request error:', error);
+      });
   };
+
+  type Person = {
+    name: {
+      idDoPedido: Integer;
+      nomeRest: string;
+      avalidado: string;
+    };
+    Avaliacao: Integer;
     
+  };
+
+  const listagemData :Person[] = restaurantes.map((restaurante) => ({
+    name: {
+      idDoPedido: restaurante.idPedido,
+      nomeRest: restaurante.nomeRestaurante,
+      avalidado: restaurante.tipoAvaliacao,
+    },
+    Avaliacao: restaurante.qtdEstrelas,
+  }));
+
+  const data = [...listagemData];  
+
+  const columns = useMemo<MRT_ColumnDef<Person>[]>(
+    () => [
+      
+      {
+        accessorKey: 'name.idDoPedido',
+        header: 'Id Pedido',
+        size: 150,
+      },
+      {
+        accessorKey: 'name.avalidado',
+        header: 'Avaliado',
+        size: 150,
+      },
+      {
+        accessorKey: 'Avaliacao',
+        header: 'Avaliação',
+        size: 20,
+      },
+    ],
+    []
+  );
+
+  const table = useMaterialReactTable({
+    columns,
+    data,
+  });
+
   return (
+    
     <body className="fundoList">
                 
                 <form className='txtRestaurante'>
@@ -39,23 +84,15 @@ const listRestaurante = () => {
                         buscarRest() }}  >Button</button>
                     
                     </div>
-                    {posts.length === 0 ? <p> Não a poster no momento  </p> : (
-                      posts.map((post) => (
-                        <div className="post" key = {post.id}>
-
-                          <h2>
-                            {post.titulo} 
-                          </h2>
-                          <p>{post.conteudo} </p>                     
-
-                        </div>
-                      ))
-                    ) }         
+                       
                 </form> 
 
+              <h1 className='nomeRestaurante'> {restaurante} </h1>          
+
+             <MaterialReactTable table={table} />
     </body>
     
   );
 }
 
-export default listRestaurante;
+export default ListRestaurante;
