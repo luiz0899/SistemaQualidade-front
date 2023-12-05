@@ -140,7 +140,7 @@ const PerguntasAvaliacao = () => {
       </div>
 
       <h1> Pede aí </h1>
-      <h2>Agradece sua avalição e preferência</h2>
+      <h2>Agradece sua avaliação e preferência</h2>
       <h2>Volte sempre</h2>
 
       <a href="/ouvidoria" className='script-Ouvidoria'>Envie uma mensagem para ouvidoria.</a>

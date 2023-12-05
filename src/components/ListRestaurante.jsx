@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import '../style/ListRestaurante.css';
 import blogFetch from '../axios/config';
 import DataTable from  'react-data-table-component';

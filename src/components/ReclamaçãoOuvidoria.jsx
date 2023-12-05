@@ -59,7 +59,7 @@ const ReclamaçãoOuvidoria = () => {
             </div>
 
             <h1> Pede aí </h1>
-            <h2>Agradece sua compreenção</h2>
+            <h2>Agradece sua compreensão</h2>
             <h2>Retornaremos o mais breve possível</h2>
 
         </div>
