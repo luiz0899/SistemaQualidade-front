@@ -1,0 +1,32 @@
+.fundoList{
+
+    background-color: rgba(234, 234, 234, 0.475);
+    border-radius: 1rem;
+    margin: 30px;
+    width: 95.2vw; 
+    height: 90vh; 
+
+}
+.input-group{
+
+    padding: 20px;
+
+}
+.nomeRestaurante{
+
+    margin: 10px;
+    text-align: center;
+    font-family: 'Lilita One', sans-serif;
+    font-size: 5rem;
+    color: rgb(0, 0, 0);
+
+}
+
+.listTable{
+  height: 18rem ;
+  background-color: white;
+}
+.btn-outline-secondary{
+  background-color : black ;
+  color: white;
+}
