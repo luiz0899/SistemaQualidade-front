@@ -65,10 +65,13 @@ const PerguntasAvaliacao = () => {
     blogFetch.post("avaliacao", dataAvaliacao)
       .then((response) => {
         console.log("POST request success:", response.data);
+        alert("Obrigado por nos avaliar.")
+        window.close();
       })
       .catch((error) => {
-        alert("O pedido informado ja foi salvo")
         console.error("POST request error:", error);
+        alert("O pedido informado ja foi salvo")
+        window.close();
       });
   };
 
